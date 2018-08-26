@@ -38,4 +38,6 @@ hparams = tf.contrib.training.HParams(total_epochs=1000,
 
 embeddings = tf.Variable(tf.random_uniform([hparams.voc_size, hparams.embedding_size], -1.0, 1.0))
 train_model = Hred(hparams, 'train', embeddings)
+print("start")
 train(train_model, hparams)
+
