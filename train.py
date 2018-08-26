@@ -10,7 +10,7 @@ def train(model, hparams):
         if checkpoint and checkpoint.model_checkpoint_path:
             model.saver.restore(sess, checkpoint.model_checkpoint_path)
 
-        for epoch in range(hparams.epochs):
+        for epoch in range(hparams.total_epochs):
             epoch_loss = 0
             for batch in range(hparams.total_batch):
                 enc_batch, dec_batch, target_batch, enc_seq_len, dec_seq_len, max_len = dialogue.next_dialogue()
