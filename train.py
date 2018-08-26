@@ -25,7 +25,7 @@ def train(model, hparams):
                 epoch_loss += _cost / hparams.total_batch
             if epoch % 100 == 0:
                 print(epoch, epoch_loss)
-                model.saver.saver(sess, './model/hred', global_step=epoch)
+                model.saver.save(sess, './model/hred', global_step=epoch)
 
 
 path = './data/koen.txt'
