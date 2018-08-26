@@ -16,7 +16,6 @@ class Seq2Seq(object):
 
         self.num_utterance = tf.placeholder(tf.int32, shape=[], name='num_utterance')
 
-        self.batch_size = hparams.batch_size
         self.num_units = hparams.num_units
         self.voc_size = hparams.voc_size
 

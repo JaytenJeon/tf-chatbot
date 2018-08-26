@@ -2,14 +2,13 @@ import tensorflow as tf
 from models import Hred
 from dialogue import Dialogue
 
-path = ''
+path = './data/koen.txt'
 dialogue = Dialogue(path)
 
 hparams = tf.contrib.training.HParams(total_epochs=1000,
                                       num_units=128,
                                       learning_rate=0.0001,
                                       voc_size=dialogue.voc_size,
-                                      batch_size=100,
                                       embedding_size=100,
                                       total_batch=len(dialogue.dialogues))
 
