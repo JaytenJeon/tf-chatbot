@@ -6,7 +6,7 @@ from dialogue import Dialogue
 def train(model, hparams):
 
     with tf.Session() as sess:
-        checkpoint = tf.trian.get_checkpint_state('./model')
+        checkpoint = tf.train.get_checkpint_state('./model')
         if checkpoint and checkpoint.model_checkpoint_path:
             model.saver.restore(sess, checkpoint.model_checkpoint_path)
 
