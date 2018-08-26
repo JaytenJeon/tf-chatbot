@@ -1,3 +1,5 @@
+import re
+
 class Dialogue:
     def __init__(self, path):
         self.dialogues = self.load_data(path)
