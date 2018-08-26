@@ -9,7 +9,8 @@ def train(model, hparams):
         checkpoint = tf.train.get_checkpoint_state('./model')
         if checkpoint and checkpoint.model_checkpoint_path:
             model.saver.restore(sess, checkpoint.model_checkpoint_path)
-
+        else:
+            sess.run(tf.global_variables_initializer())
         for epoch in range(hparams.total_epochs):
             epoch_loss = 0
             for batch in range(hparams.total_batch):
