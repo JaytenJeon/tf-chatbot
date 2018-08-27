@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import sys
 from models import Hred
 from dialogue import Dialogue
 
@@ -29,15 +30,19 @@ def chat(model):
     sess.run(tf.global_variables_initializer())
     ckpt = tf.train.get_checkpoint_state('./model')
     model.saver.restore(sess, ckpt.model_checkpoint_path)
-    line = input(">")
+    sys.stdout.write("> ")
+    sys.stdout.flush()
+    line = sys.stdin.readline()
     sentences = []
 
     while line:
-        sentences.append(line)
+        sentences.append(line.strip())
         response = reply(model, sess, sentences)
+        print(response)
         sentences.append(response)
-        line = input(response + "\n>")
-
+        sys.stdout.write("\n> ")
+        sys.stdout.flush()
+        line = sys.stdin.readline()
 
 path = './data/conversation.txt'
 dialogue = Dialogue(path)
