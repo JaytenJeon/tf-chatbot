@@ -12,6 +12,7 @@ def reply(model, sess, sentences):
 
     padded = [dialogue.pad(tokens, max_len) for tokens in tokens_arr]
     ids_arr = [dialogue.tokens_to_ids(tokens) for tokens in padded]
+    print("확인")
     result = sess.run(model.sample_id,
                       feed_dict={model.source: ids_arr,
                                  model.source_seq_length: [len(ids) for ids in ids_arr],
@@ -30,6 +31,7 @@ def chat(model):
     sess.run(tf.global_variables_initializer())
     ckpt = tf.train.get_checkpoint_state('./model')
     model.saver.restore(sess, ckpt.model_checkpoint_path)
+
     sys.stdout.write("> ")
     sys.stdout.flush()
     line = sys.stdin.readline()
