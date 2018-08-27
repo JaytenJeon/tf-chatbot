@@ -17,7 +17,6 @@ def reply(model, sess, sentences):
                       feed_dict={model.source: ids_arr,
                                  model.source_seq_length: [len(ids) for ids in ids_arr],
                                  model.num_utterance: sentence_len})
-    print("확인2")
     result = result[-1]
     end = np.where(result == 2)
 
@@ -46,6 +45,7 @@ def chat(model):
         sys.stdout.write("\n> ")
         sys.stdout.flush()
         line = sys.stdin.readline()
+
 
 path = './data/conversation.txt'
 dialogue = Dialogue(path)
