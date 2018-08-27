@@ -1,10 +1,17 @@
 import re
+import os
+
 
 class Dialogue:
     def __init__(self, path):
         self.dialogues = self.load_data(path)
         self.sentences = sum(self.dialogues, [])
-        self.voc_arr = ['_P_', '_S_', '_E_', '_U_'] + self.make_voc()
+
+        if not os.path.isfile(path+'.voc'):
+            self.make_voc(path+'.voc')
+
+        self.voc_arr = ['_P_', '_S_', '_E_', '_U_'] + self.load_voc(path + '.voc')
+
         self.voc_dict = {voc: i for i, voc in enumerate(self.voc_arr)}
         self.voc_size = len(self.voc_arr)
 
@@ -40,11 +47,19 @@ class Dialogue:
         padded = tokens + ['_P_'] * (max_len - len(tokens))
         return padded
 
-    def make_voc(self):
+    def make_voc(self, path):
         voc_set = set()
         for sentence in self.sentences:
             voc_set.update(self.tokenizer(sentence))
-        return list(voc_set)
+        voc_arr = list(voc_set)
+        with open(path, 'w', encoding='utf-8') as file:
+            for voc in voc_arr:
+                file.write(voc+'\r')
+
+    def load_voc(self, path):
+        with open(path, 'r', encoding='utf-8') as file:
+            voc_arr = [line.strip for line in file]
+        return voc_arr
 
     def make_seq_data(self, sentences):
         seq_data = [self.tokenizer(sentence) for sentence in sentences]
