@@ -62,7 +62,7 @@ class Seq2Seq(object):
 
             # initial_state shape check.!!!!
             decoder = tf.contrib.seq2seq.BasicDecoder(cell, helper, initial_state,
-                                                      output_layer=tf.layers.Dense(hparams.voc_size))
+                                                      output_layer=tf.layers.Dense(hparams.voc_size, use_bias=False))
 
             outputs, states, length = tf.contrib.seq2seq.dynamic_decode(decoder)
 
