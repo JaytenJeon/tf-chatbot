@@ -28,7 +28,7 @@ def train(model, hparams):
                 model.saver.save(sess, './model/hred', global_step=epoch)
 
 
-path = './data/koen.txt'
+path = './data/conversation.txt'
 dialogue = Dialogue(path)
 
 hparams = tf.contrib.training.HParams(total_epochs=1000,
