@@ -3,9 +3,9 @@ import tensorflow as tf
 
 class Seq2Seq(object):
 
-    def __init__(self, hparams, mode, embeddings):
+    def __init__(self, hparams, mode):
         self.mode = mode
-        self.embeddings = embeddings
+        self.embeddings = tf.Variable(tf.random_uniform([hparams.voc_size, hparams.embedding_size], -1.0, 1.0))
 
         self.source = tf.placeholder(tf.int32, shape=[None, None], name='source')
         self.target_input = tf.placeholder(tf.int32, shape=[None, None], name='target_input')
