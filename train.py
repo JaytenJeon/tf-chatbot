@@ -4,8 +4,10 @@ from dialogue import Dialogue
 
 
 def train(model, hparams):
-
-    with tf.Session() as sess:
+    config = tf.ConfigProto()
+    config.gpu_options.allocator_type = 'BFC'
+    config.gpu_options.per_process_gpu_memory_fraction = 0.70
+    with tf.Session(config) as sess:
         checkpoint = tf.train.get_checkpoint_state('./model')
         if checkpoint and checkpoint.model_checkpoint_path:
             model.saver.restore(sess, checkpoint.model_checkpoint_path)
