@@ -12,18 +12,19 @@ def reply(model, sess, sentences):
 
     padded = [dialogue.pad(tokens, max_len) for tokens in tokens_arr]
     ids_arr = [dialogue.tokens_to_ids(tokens) for tokens in padded]
-    print("확인")
+
     result = sess.run(model.sample_id,
                       feed_dict={model.source: ids_arr,
                                  model.source_seq_length: [len(ids) for ids in ids_arr],
                                  model.num_utterance: sentence_len})
+    print("확인2")
     result = result[-1]
     end = np.where(result == 2)
 
-    reply = ' '.join(dialogue.ids_to_tokens(result[:end]))
-    if reply == '':
-        reply = '.....'
-    return reply
+    r = ' '.join(dialogue.ids_to_tokens(result[:end]))
+    if r == '':
+        r = '.....'
+    return r
 
 
 def chat(model):
