@@ -15,7 +15,6 @@ def train(model, hparams):
             epoch_loss = 0
             for batch in range(hparams.total_batch):
                 enc_batch, dec_batch, target_batch, enc_seq_len, dec_seq_len, max_len = dialogue.next_dialogue()
-                print(enc_batch[0], dec_batch[0], target_batch[0])
                 _cost, _ = sess.run([model.loss, model.train_op], feed_dict={model.source: enc_batch,
                                                                              model.target_input: dec_batch,
                                                                              model.target_output: target_batch,
