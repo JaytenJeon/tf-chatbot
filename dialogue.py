@@ -58,7 +58,7 @@ class Dialogue:
 
     def load_voc(self, path):
         with open(path, 'r', encoding='utf-8') as file:
-            voc_arr = [line.strip for line in file]
+            voc_arr = [line.strip() for line in file]
         return voc_arr
 
     def make_seq_data(self, sentences):
